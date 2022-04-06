@@ -4,8 +4,6 @@ import java.util.LinkedList;
 
 public class graph<T extends Comparable<T>>{
     /*
-    getEdge(u, v)
-    Returns the edge from vertex u to vertex v, if one exists; otherwise return null. For an undirected graph, there is no difference between getEdge(u, v) and getEdge(v, u).
     endVertices(e)
     Returns an array containing the two endpoint vertices of edge e. If the graph is directed, the first vertex is the origin and the second is the destination.
     opposite(v, e)
