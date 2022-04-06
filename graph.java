@@ -4,14 +4,6 @@ import java.util.LinkedList;
 
 public class graph<T extends Comparable<T>>{
     /*
-    endVertices(e)
-    Returns an array containing the two endpoint vertices of edge e. If the graph is directed, the first vertex is the origin and the second is the destination.
-    opposite(v, e)
-    For edge e incident to vertex v, returns the other vertex of the edge; an error occurs if e is not incident to v.
-    outDegree(v)
-    Returns the number of outgoing edges from vertex v.
-    inDegree(v)
-    Returns the number of incoming edges to vertex v. For an undirected graph, this returns the same value as does outDegree(v).
     outgoingEdges(v)
     Returns an iteration of all outgoing edges from vertex v.
     incomingEdges(v)
@@ -144,6 +136,26 @@ public class graph<T extends Comparable<T>>{
         return null;
     }
 
+    public Vertex<T> opposite(T v1, T e1) {
+        Edge toReturn;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+                HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for(Vertex<T> vertex: tempMap.keySet()) {
+                    Edge<T> value = tempMap.get(vertex);
+                    if (value.getData().compareTo(e1) == 0) {
+                        for (int j = 0; j < value.getVertices().size(); j++) {
+                            if (value.getVertices().get(j).getData().compareTo(v1) != 0) {
+                                return value.getVertices().get(j);
+                            }
+                        }
+                    }
+                }  
+            }
+        }
+        return null;
+    }
+
     public boolean isInList(ArrayList<T> list, T data) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) == data) {
@@ -152,4 +164,49 @@ public class graph<T extends Comparable<T>>{
         }
         return false;
     }
-}
+
+    public ArrayList<Vertex> endVertices(T e1) {
+        ArrayList<T> edges = new ArrayList<T>();
+        for (int i = 0; i < list.size(); i++) {
+            HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+            for(Vertex<T> vertex: tempMap.keySet()) {
+                Edge<T> value = tempMap.get(vertex);
+                if (value.getData().compareTo(e1) == 0) {
+                    return value.getVertices();
+                }
+                else if (edges.size() == 0) {
+                    edges.add(value.getData());
+                }
+                else if (isInList(edges, value.getData()) == false) {
+                    edges.add(value.getData());
+                }
+            }
+        }
+        return null;
+    }
+
+    public int outDegree(T v1) {
+        int counter = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+                HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for (Vertex<T> vertex: tempMap.keySet()) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
+    
+    public int inDegree(T v1) {
+        int counter = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+                HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for (Vertex<T> vertex: tempMap.keySet()) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
