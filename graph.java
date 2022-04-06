@@ -4,8 +4,6 @@ import java.util.LinkedList;
 
 public class graph<T extends Comparable<T>>{
     /*
-    removeVertex(v)
-    Removes vertex v and all its incident edges from the graph.
     removeEdge(e)
     Removes edge e from the graph.
     */
@@ -233,5 +231,39 @@ public class graph<T extends Comparable<T>>{
             }
         }
         return toReturn;
+    }
+
+    public void removeEdge(T e1) {
+        Vertex keyToRemove = null;
+        for (int i = 0; i < list.size(); i++) {
+            HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for (Vertex<T> vertex: tempMap.keySet()) {
+                    Edge<T> value = tempMap.get(vertex);
+                    if (value.getData().compareTo(e1) == 0) {
+                        keyToRemove = vertex;
+                    }
+                }
+                if (keyToRemove != null) {
+                    tempMap.remove(keyToRemove);  
+                }  
+        }
+    }
+
+    public void removeVertex(T v1) {
+        ArrayList<T> edges = new ArrayList<T>();
+        for (int i = 0; i < list.size(); i++) {
+            HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+               for (Vertex<T> vertex: tempMap.keySet()) {
+                    Edge<T> value = tempMap.get(vertex);
+                    edges.add(value.getData());
+                } 
+                for (int j = 0; j < edges.size(); j++) {
+                    removeEdge(edges.get(j));
+                }
+                list.remove(i);
+                break;
+            }
+        } 
     }
     }
