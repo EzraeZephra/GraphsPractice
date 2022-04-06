@@ -9,7 +9,11 @@ public class graphMain {
         graph.insertEdge("f", 1, 2);
         graph.insertEdge("a", 1, 3);
         graph.removeVertex(2);
-        ArrayList<Edge> list = new ArrayList<Edge>();
+        ArrayList<Vertex> list = new ArrayList<Vertex>();
+        list = graph.vertices();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getData());
+        }
         /*
         System.out.println(graph.inDegree(1));
         System.out.println(graph.opposite(1, "a").getData());
