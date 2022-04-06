@@ -4,4 +4,8 @@ class Vertex<T extends Comparable<T>> {
     Vertex (T label) {
         this.label = label;
     }
+
+    public T getData() {
+        return label;
+    }
 }
