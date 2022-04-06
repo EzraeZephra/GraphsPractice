@@ -4,10 +4,6 @@ import java.util.LinkedList;
 
 public class graph<T extends Comparable<T>>{
     /*
-    outgoingEdges(v)
-    Returns an iteration of all outgoing edges from vertex v.
-    incomingEdges(v)
-    Returns an iteration of all incoming edges to vertex v. For an undirected graph, this returns the same collection as does outgoingEdges(v).
     removeVertex(v)
     Removes vertex v and all its incident edges from the graph.
     removeEdge(e)
@@ -209,4 +205,33 @@ public class graph<T extends Comparable<T>>{
             }
         }
         return counter;
+    }
+
+    public ArrayList<Edge> outgoingEdges(T v1) {
+        ArrayList<Edge> toReturn = new ArrayList<Edge>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+                HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for (Vertex<T> vertex: tempMap.keySet()) {
+                    Edge<T> value = tempMap.get(vertex);
+                    toReturn.add(value);
+                }
+            }
+        }
+        return toReturn;
+    }
+
+    public ArrayList<Edge> incomingEdges(T v1) {
+        ArrayList<Edge> toReturn = new ArrayList<Edge>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVertex().getData().compareTo(v1) == 0) {
+                HashMap<Vertex<T>, Edge<T>> tempMap = list.get(i).getHashMap();
+                for (Vertex<T> vertex: tempMap.keySet()) {
+                    Edge<T> value = tempMap.get(vertex);
+                    toReturn.add(value);
+                }
+            }
+        }
+        return toReturn;
+    }
     }
